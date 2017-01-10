@@ -16,12 +16,15 @@ namespace 天龙二叉树人物遍历
 {
     public partial class Form1 : Form
     {
+
         //载入初始化DLL的调用函数
         [DllImport("DLL",EntryPoint = "initDll",CallingConvention=CallingConvention.Cdecl)]
         public static extern int initDll(int ProcID);
        
         //全局参数
         string GameName = "Game";
+
+
 
         public Form1()
         {
@@ -53,9 +56,13 @@ namespace 天龙二叉树人物遍历
             //进制转换
             Int32 FAddressInt = Convert.ToInt32(BasetextBox.Text, 16);
             String FCodestr = FCtextBox.Text;
-            int SectionSize = 0;
+            
+
             char[] SectionName = SectionNametextBox.Text.ToArray();
             int size = FCodestr.Length;
+
+           int result = 0;
+           
             List<Byte> Code = new List<Byte>();
 
             for (int i = 0; i < size / 2; i++)
@@ -71,14 +78,26 @@ namespace 天龙二叉树人物遍历
             System.Byte[] FCoderchr = Code.ToArray();
             //获取区段大小
 
-           // DLL.asdf(FAddressInt, SectionName);
-           SectionSize =  DLL.GetProSectionSizeFromPE(FAddressInt, SectionName);
-           if(SectionSize == -1)
-           {
-               return;
-           }
-            //特征码搜索
-            DLL.FeatureCode(FAddressInt, FCoderchr,SectionSize);
+            
+            
+
+            unsafe
+            {
+                int SectionBase = (int)&SectionBase;
+                int SectionSize = (int)&SectionSize;
+                result = DLL.GetProSectionSizeFromPE(FAddressInt, SectionName, SectionBase, SectionSize);
+                if (result == -1)
+                {
+                    return;
+                }
+
+                //特征码搜索
+                DLL.FeatureCode(SectionBase, FCoderchr, SectionSize);
+
+            }
+            
+           
+           
 
 
 

@@ -58,14 +58,14 @@ DLL_API int ReserchTree()
 }
 
 //搜索目标内存（单位页）
-DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
+DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int SectionSize)
 {
-	char TempAddress[ReadSize]; // 读取的目标地址
+	char *TempAddress = (char*)malloc(SectionSize);
 	
 	
 	//读取内存以及初始化
-	memset(TempAddress, 0, sizeof(TempAddress));
-	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, ReadSize, NULL);
+	memset(TempAddress, 0, SectionSize);
+	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, SectionSize, NULL);
 
 	//获取目标内存PE文件text段的大小
 	//开始遍历整个内存空间
@@ -75,7 +75,7 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
 
 
 	//直接用C语言实现
-	for (int i = 0,j = 0; i < sizeof(TempAddress); i++)
+	for (int i = 0, j = 0; i < SectionSize; i++)
 	{
 
 		for (j = 0; j < sizeof(FCode); j++,i++)
@@ -98,6 +98,10 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
 		}
 
 	}
+
+	//释放资源
+	free(TempAddress);
+
 		
 
 }
@@ -106,13 +110,14 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
 
 
 //获取文件的区段大小
-DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
+DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[],OUT int *OutSectionBase,OUT int *OutSectionSize)
 {
 	if (BaseAddress == NULL || TarGetName == NULL)
 	{
 		MessageBox(NULL, L"输入区块参数错误", NULL, 0);
 		return -1;
 	}
+
 	char TempAddress[ReadSize]; // 读取的目标地址
 	IMAGE_DOS_HEADER *DosHeader;  //Dos头
 	IMAGE_NT_HEADERS *NTHeader;	//Nt头
@@ -120,9 +125,9 @@ DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
 	IMAGE_SECTION_HEADER *SecHeader;//section 头
 	int result = 0;
 	int sectionCount = 0;
-	int SectionSize = 0;
 	DWORD SecTmp;
 	int Tmp;
+	int SectionSize = 0;
 	
 	//读取内存以及初始化
 	memset(TempAddress, 0, sizeof(TempAddress));
@@ -176,16 +181,12 @@ DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
 		return -1;
 	}
 
-	return SectionSize;
+	*OutSectionBase = NTHeader->OptionalHeader.ImageBase + SecHeader->VirtualAddress;
+	*OutSectionSize = SectionSize;
+
+	return 0;
 
 }
-
-
-
-
-
-
-
 
 
 
