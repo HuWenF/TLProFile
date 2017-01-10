@@ -10,10 +10,15 @@ namespace 天龙二叉树人物遍历
     {
        
         //调用的DLL函数
-        [DllImport("DLL")]
-        public static extern void FeatureCode(System.Int32 BaseAddress, char[] FCode);
-        [DllImport("DLL")]
+        [DllImport("DLL", EntryPoint = "FeatureCode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void FeatureCode(System.Int32 BaseAddress, System.Byte[] FCode,int RangeSize);
+
+        [DllImport("DLL", EntryPoint = "ReserchTree", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReserchTree();
+
+        [DllImport("DLL", EntryPoint = "GetProSectionSizeFromPE", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetProSectionSizeFromPE(System.Int32 BaseAddress, char[] TarGetName);
+
 
 
     }

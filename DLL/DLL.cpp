@@ -25,9 +25,6 @@ DLL_API int initDll(int ProcID)
 	}
 
 	return 1;
-
-
-
 }
 
 
@@ -60,23 +57,28 @@ DLL_API int ReserchTree()
 
 }
 
-
-DLL_API void FeatureCode(DWORD BaseAddress, char *FCode)
+//搜索目标内存（单位页）
+DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
 {
+	char TempAddress[ReadSize]; // 读取的目标地址
 	
-	char TempAddress[ReadSize];
-	string STempAddr;
-	string SFCode(FCode);
-	int matchInt = 0;
-	//读取内存
+	
+	//读取内存以及初始化
 	memset(TempAddress, 0, sizeof(TempAddress));
 	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, ReadSize, NULL);
-	//直接用C语言实现
 
+	//获取目标内存PE文件text段的大小
+	//开始遍历整个内存空间
+	
+
+
+
+
+	//直接用C语言实现
 	for (int i = 0,j = 0; i < sizeof(TempAddress); i++)
 	{
 
-		for (j = 0; j < sizeof(FCode); i++)
+		for (j = 0; j < sizeof(FCode); j++,i++)
 		{
 			if (FCode[j] == (char)"?")
 			{
@@ -87,6 +89,7 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode)
 			{
 				break;
 			}
+			
 		}
 
 		if (j == sizeof(FCode))
@@ -98,6 +101,93 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode)
 		
 
 }
+
+
+
+
+//获取文件的区段大小
+DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
+{
+	if (BaseAddress == NULL || TarGetName == NULL)
+	{
+		MessageBox(NULL, L"输入区块参数错误", NULL, 0);
+		return -1;
+	}
+	char TempAddress[ReadSize]; // 读取的目标地址
+	IMAGE_DOS_HEADER *DosHeader;  //Dos头
+	IMAGE_NT_HEADERS *NTHeader;	//Nt头
+	IMAGE_OPTIONAL_HEADER *OPHeader;//Option 头
+	IMAGE_SECTION_HEADER *SecHeader;//section 头
+	int result = 0;
+	int sectionCount = 0;
+	int SectionSize = 0;
+	DWORD SecTmp;
+	int Tmp;
+	
+	//读取内存以及初始化
+	memset(TempAddress, 0, sizeof(TempAddress));
+	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, ReadSize, NULL);
+
+	//获取目标内存PE文件text段的大小
+
+	DosHeader = (IMAGE_DOS_HEADER *)TempAddress;
+	NTHeader = (IMAGE_NT_HEADERS *)(DosHeader->e_lfanew + TempAddress);
+	//判断是否是PE文件
+	if (DosHeader->e_magic != 0x5a4d || NTHeader->Signature != 0x4550)
+	{
+		MessageBox(NULL, L"非PE文件 Error", NULL, 0);
+		return -1;
+	}
+	//获取区块个数
+	sectionCount = NTHeader->FileHeader.NumberOfSections;
+	//获取区块首地址
+	int SetionAddr = (int)(IMAGE_SECTION_HEADER *)&(NTHeader->OptionalHeader);
+	SetionAddr = SetionAddr + NTHeader->FileHeader.SizeOfOptionalHeader;
+
+	SecHeader = (IMAGE_SECTION_HEADER *)SetionAddr;
+
+	OutputDebugStringA((LPCSTR)SecHeader->Name);
+	//判断是不是.text区段
+	while (sectionCount)
+	{
+		//判断是不是目标区段
+		result = strcmp((char *)SecHeader->Name, TarGetName);
+		if (!result)
+		{
+			//获取区段大小
+			SectionSize = SecHeader->SizeOfRawData;
+			break;
+		}
+		//	int A = (int)&(SecHeader->Characteristics);
+		//	int B = SecHeader->VirtualAddress;
+		//	int C = (A - SecTmp + 0x4) + SecTmp;
+		sectionCount--;
+		//赋值临时变量
+		SecTmp = (DWORD)SecHeader;
+		Tmp = (DWORD)&(SecHeader->Characteristics);
+
+		//计算区块大小得到下一个区块地址
+		SecHeader = (IMAGE_SECTION_HEADER *)(Tmp - SecTmp + 0x4 + SecTmp);
+
+	}
+	if (SectionSize == 0)
+	{
+		MessageBox(NULL, L"没找到目标区段名称 Error", NULL, 0);
+		return -1;
+	}
+
+	return SectionSize;
+
+}
+
+
+
+
+
+
+
+
+
 
 
 

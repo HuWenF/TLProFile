@@ -34,6 +34,8 @@
             this.FCbutton = new System.Windows.Forms.Button();
             this.FClabel = new System.Windows.Forms.Label();
             this.FCtextBox = new System.Windows.Forms.TextBox();
+            this.SectionNamelabel = new System.Windows.Forms.Label();
+            this.SectionNametextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -48,16 +50,16 @@
             // 
             // BasetextBox
             // 
-            this.BasetextBox.Location = new System.Drawing.Point(167, 65);
+            this.BasetextBox.Location = new System.Drawing.Point(162, 118);
             this.BasetextBox.Name = "BasetextBox";
             this.BasetextBox.Size = new System.Drawing.Size(100, 21);
             this.BasetextBox.TabIndex = 1;
-            this.BasetextBox.Text = "401000";
+            this.BasetextBox.Text = "400000";
             // 
             // Baselabel
             // 
             this.Baselabel.AutoSize = true;
-            this.Baselabel.Location = new System.Drawing.Point(36, 68);
+            this.Baselabel.Location = new System.Drawing.Point(31, 121);
             this.Baselabel.Name = "Baselabel";
             this.Baselabel.Size = new System.Drawing.Size(125, 12);
             this.Baselabel.TabIndex = 2;
@@ -65,7 +67,7 @@
             // 
             // FCbutton
             // 
-            this.FCbutton.Location = new System.Drawing.Point(26, 129);
+            this.FCbutton.Location = new System.Drawing.Point(21, 182);
             this.FCbutton.Name = "FCbutton";
             this.FCbutton.Size = new System.Drawing.Size(75, 23);
             this.FCbutton.TabIndex = 3;
@@ -76,7 +78,7 @@
             // FClabel
             // 
             this.FClabel.AutoSize = true;
-            this.FClabel.Location = new System.Drawing.Point(84, 94);
+            this.FClabel.Location = new System.Drawing.Point(79, 147);
             this.FClabel.Name = "FClabel";
             this.FClabel.Size = new System.Drawing.Size(77, 12);
             this.FClabel.TabIndex = 4;
@@ -84,16 +86,36 @@
             // 
             // FCtextBox
             // 
-            this.FCtextBox.Location = new System.Drawing.Point(167, 91);
+            this.FCtextBox.Location = new System.Drawing.Point(162, 144);
             this.FCtextBox.Name = "FCtextBox";
             this.FCtextBox.Size = new System.Drawing.Size(237, 21);
             this.FCtextBox.TabIndex = 5;
+            this.FCtextBox.Text = "8B44240C487826538B5C2414558B6C2410";
+            // 
+            // SectionNamelabel
+            // 
+            this.SectionNamelabel.AutoSize = true;
+            this.SectionNamelabel.Location = new System.Drawing.Point(31, 91);
+            this.SectionNamelabel.Name = "SectionNamelabel";
+            this.SectionNamelabel.Size = new System.Drawing.Size(53, 12);
+            this.SectionNamelabel.TabIndex = 7;
+            this.SectionNamelabel.Text = "区段名称";
+            // 
+            // SectionNametextBox
+            // 
+            this.SectionNametextBox.Location = new System.Drawing.Point(162, 88);
+            this.SectionNametextBox.Name = "SectionNametextBox";
+            this.SectionNametextBox.Size = new System.Drawing.Size(100, 21);
+            this.SectionNametextBox.TabIndex = 6;
+            this.SectionNametextBox.Text = ".text";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 374);
+            this.Controls.Add(this.SectionNamelabel);
+            this.Controls.Add(this.SectionNametextBox);
             this.Controls.Add(this.FCtextBox);
             this.Controls.Add(this.FClabel);
             this.Controls.Add(this.FCbutton);
@@ -115,6 +137,8 @@
         private System.Windows.Forms.Button FCbutton;
         private System.Windows.Forms.Label FClabel;
         private System.Windows.Forms.TextBox FCtextBox;
+        private System.Windows.Forms.Label SectionNamelabel;
+        private System.Windows.Forms.TextBox SectionNametextBox;
     }
 }
 
