@@ -58,23 +58,26 @@ DLL_API int ReserchTree()
 }
 
 //搜索目标内存（单位页）
-DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
+DLL_API int FeatureCode(DWORD BaseAddress, char *FCode,int Size)
 {
-	char TempAddress[ReadSize]; // 读取的目标地址
 	
-	
+	//分配内存以及初始化
+	int m_ReadSize = Size;
+	char *TempAddress = (char *)malloc(m_ReadSize);
+	if (TempAddress == NULL)
+	{
+		MessageBox(NULL, L"内存不足 Error", NULL, 0);
+		return -1;
+	}
 	//读取内存以及初始化
-	memset(TempAddress, 0, sizeof(TempAddress));
-	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, ReadSize, NULL);
-
-	//获取目标内存PE文件text段的大小
-	//开始遍历整个内存空间
+	memset(TempAddress, 0, m_ReadSize);
+	if (ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, m_ReadSize, NULL))
+	{
+		MessageBox(NULL, L"无法读取目标内存 Error", NULL, 0);
+		return -1;
+	}
 	
-
-
-
-
-	//直接用C语言实现
+	//直接用C语言实现特征码扫描
 	for (int i = 0,j = 0; i < sizeof(TempAddress); i++)
 	{
 
@@ -106,7 +109,7 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int PageNumber)
 
 
 //获取文件的区段大小
-DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
+DLL_API int GetProSectionSizeFromPE(IN DWORD BaseAddress, IN char TarGetName[], OUT int *OutSectionBaseAddr,OUT int *OutSectionSize)
 {
 	if (BaseAddress == NULL || TarGetName == NULL)
 	{
@@ -121,6 +124,7 @@ DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
 	int result = 0;
 	int sectionCount = 0;
 	int SectionSize = 0;
+	int SectionSize;
 	DWORD SecTmp;
 	int Tmp;
 	
@@ -176,7 +180,10 @@ DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[])
 		return -1;
 	}
 
-	return SectionSize;
+	*OutSectionSize = SectionSize;
+	*OutSectionBaseAddr = SecHeader->VirtualAddress + NTHeader->OptionalHeader.ImageBase;
+
+	return 0;
 
 }
 

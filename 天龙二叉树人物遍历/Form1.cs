@@ -14,6 +14,11 @@ using System.Diagnostics;
 
 namespace 天龙二叉树人物遍历
 {
+    
+
+
+
+
     public partial class Form1 : Form
     {
         //载入初始化DLL的调用函数
@@ -53,9 +58,15 @@ namespace 天龙二叉树人物遍历
             //进制转换
             Int32 FAddressInt = Convert.ToInt32(BasetextBox.Text, 16);
             String FCodestr = FCtextBox.Text;
-            int SectionSize = 0;
+           
             char[] SectionName = SectionNametextBox.Text.ToArray();
             int size = FCodestr.Length;
+            int SectionPage = 0;
+
+            int SectionBase = 0;
+            int SectionSize = 0;
+           
+
             List<Byte> Code = new List<Byte>();
 
             for (int i = 0; i < size / 2; i++)
@@ -70,15 +81,19 @@ namespace 天龙二叉树人物遍历
             //特征码格式转换
             System.Byte[] FCoderchr = Code.ToArray();
             //获取区段大小
+            unsafe
+            {
+                DLL.GetProSectionSizeFromPE(FAddressInt, SectionName, (System.Int32*)&SectionBase, (System.Int32*)&SectionSize);
+                if (SectionSize == -1)
+                {
+                    return;
+                }
 
-           // DLL.asdf(FAddressInt, SectionName);
-           SectionSize =  DLL.GetProSectionSizeFromPE(FAddressInt, SectionName);
-           if(SectionSize == -1)
-           {
-               return;
-           }
+            }
+           
+           
             //特征码搜索
-            DLL.FeatureCode(FAddressInt, FCoderchr,SectionSize);
+           DLL.FeatureCode(FAddressInt, FCoderchr, SectionSize);
 
 
 
