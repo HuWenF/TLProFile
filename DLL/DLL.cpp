@@ -62,6 +62,8 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int SectionSize)
 {
 	char *TempAddress = (char*)malloc(SectionSize);
 	
+
+
 	
 	//读取内存以及初始化
 	memset(TempAddress, 0, SectionSize);
