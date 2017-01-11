@@ -58,27 +58,24 @@ DLL_API int ReserchTree()
 }
 
 //搜索目标内存（单位页）
-DLL_API int FeatureCode(DWORD BaseAddress, char *FCode,int Size)
+DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int SectionSize)
 {
+	char *TempAddress = (char*)malloc(SectionSize);
 	
-	//分配内存以及初始化
-	int m_ReadSize = Size;
-	char *TempAddress = (char *)malloc(m_ReadSize);
-	if (TempAddress == NULL)
-	{
-		MessageBox(NULL, L"内存不足 Error", NULL, 0);
-		return -1;
-	}
+	
 	//读取内存以及初始化
-	memset(TempAddress, 0, m_ReadSize);
-	if (ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, m_ReadSize, NULL))
-	{
-		MessageBox(NULL, L"无法读取目标内存 Error", NULL, 0);
-		return -1;
-	}
+	memset(TempAddress, 0, SectionSize);
+	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, SectionSize, NULL);
+
+	//获取目标内存PE文件text段的大小
+	//开始遍历整个内存空间
 	
-	//直接用C语言实现特征码扫描
-	for (int i = 0,j = 0; i < sizeof(TempAddress); i++)
+
+
+
+
+	//直接用C语言实现
+	for (int i = 0, j = 0; i < SectionSize; i++)
 	{
 
 		for (j = 0; j < sizeof(FCode); j++,i++)
@@ -101,6 +98,10 @@ DLL_API int FeatureCode(DWORD BaseAddress, char *FCode,int Size)
 		}
 
 	}
+
+	//释放资源
+	free(TempAddress);
+
 		
 
 }
@@ -109,13 +110,14 @@ DLL_API int FeatureCode(DWORD BaseAddress, char *FCode,int Size)
 
 
 //获取文件的区段大小
-DLL_API int GetProSectionSizeFromPE(IN DWORD BaseAddress, IN char TarGetName[], OUT int *OutSectionBaseAddr,OUT int *OutSectionSize)
+DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[],OUT int *OutSectionBase,OUT int *OutSectionSize)
 {
 	if (BaseAddress == NULL || TarGetName == NULL)
 	{
 		MessageBox(NULL, L"输入区块参数错误", NULL, 0);
 		return -1;
 	}
+
 	char TempAddress[ReadSize]; // 读取的目标地址
 	IMAGE_DOS_HEADER *DosHeader;  //Dos头
 	IMAGE_NT_HEADERS *NTHeader;	//Nt头
@@ -123,10 +125,9 @@ DLL_API int GetProSectionSizeFromPE(IN DWORD BaseAddress, IN char TarGetName[], 
 	IMAGE_SECTION_HEADER *SecHeader;//section 头
 	int result = 0;
 	int sectionCount = 0;
-	int SectionSize = 0;
-	int SectionSize;
 	DWORD SecTmp;
 	int Tmp;
+	int SectionSize = 0;
 	
 	//读取内存以及初始化
 	memset(TempAddress, 0, sizeof(TempAddress));
@@ -180,19 +181,12 @@ DLL_API int GetProSectionSizeFromPE(IN DWORD BaseAddress, IN char TarGetName[], 
 		return -1;
 	}
 
+	*OutSectionBase = NTHeader->OptionalHeader.ImageBase + SecHeader->VirtualAddress;
 	*OutSectionSize = SectionSize;
-	*OutSectionBaseAddr = SecHeader->VirtualAddress + NTHeader->OptionalHeader.ImageBase;
 
 	return 0;
 
 }
-
-
-
-
-
-
-
 
 
 
