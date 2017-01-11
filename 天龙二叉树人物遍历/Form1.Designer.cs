@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.BasetextBox = new System.Windows.Forms.TextBox();
             this.Baselabel = new System.Windows.Forms.Label();
@@ -42,11 +43,14 @@
             this.ResultlistView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 283);
+            this.button1.Location = new System.Drawing.Point(61, 252);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -96,7 +100,7 @@
             this.FCtextBox.Name = "FCtextBox";
             this.FCtextBox.Size = new System.Drawing.Size(237, 21);
             this.FCtextBox.TabIndex = 5;
-            this.FCtextBox.Text = "8B44240C487826538B5C2414558B6C2410";
+            this.FCtextBox.Text = "8B??240C487826538B5C2414558B6C2410";
             // 
             // SectionNamelabel
             // 
@@ -127,7 +131,7 @@
             // ListTextBox
             // 
             this.ListTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ListTextBox.Location = new System.Drawing.Point(142, 89);
+            this.ListTextBox.Location = new System.Drawing.Point(459, 89);
             this.ListTextBox.Multiline = true;
             this.ListTextBox.Name = "ListTextBox";
             this.ListTextBox.ReadOnly = true;
@@ -145,19 +149,19 @@
             // 
             // ResultlistView
             // 
+            this.ResultlistView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.ResultlistView.BackgroundImageTiled = true;
             this.ResultlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.ResultlistView.ContextMenuStrip = this.contextMenuStrip1;
             this.ResultlistView.Cursor = System.Windows.Forms.Cursors.Default;
             this.ResultlistView.FullRowSelect = true;
             this.ResultlistView.GridLines = true;
-            this.ResultlistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ResultlistView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ResultlistView.LabelEdit = true;
-            this.ResultlistView.Location = new System.Drawing.Point(278, 89);
+            this.ResultlistView.Location = new System.Drawing.Point(151, 89);
             this.ResultlistView.Name = "ResultlistView";
-            this.ResultlistView.Size = new System.Drawing.Size(177, 186);
+            this.ResultlistView.Size = new System.Drawing.Size(175, 186);
             this.ResultlistView.TabIndex = 12;
             this.ResultlistView.UseCompatibleStateImageBehavior = false;
             this.ResultlistView.View = System.Windows.Forms.View.Details;
@@ -165,11 +169,27 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "行数";
+            this.columnHeader1.Width = 50;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "数值";
-            this.columnHeader2.Width = 83;
+            this.columnHeader2.Width = 120;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.复制ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip1.Text = "复制";
+            // 
+            // 复制ToolStripMenuItem
+            // 
+            this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
+            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.复制ToolStripMenuItem.Text = "复制";
+            this.复制ToolStripMenuItem.Click += new System.EventHandler(this.复制ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -190,6 +210,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +232,8 @@
         private System.Windows.Forms.ListView ResultlistView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 复制ToolStripMenuItem;
     }
 }
 

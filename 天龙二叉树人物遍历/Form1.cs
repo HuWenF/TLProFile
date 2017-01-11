@@ -67,6 +67,9 @@ namespace 天龙二叉树人物遍历
             for (int i = 0; i < size; i++)
             {
                 //Debug.WriteLine(FCodestr.Substring(i*8, 8));
+                //Debug.WriteLine(FCodestr.Replace("?", "CC"));
+                //首先把?字符串转化为CC字符串
+                FCodestr = FCodestr.Replace("?", "C");
                 //开始转换 ascii码转换为字节 比如"8E"的ascii转成8E的单字节字节
                 Debug.WriteLine(Convert.ToByte(FCodestr.Substring(i * 2, 2), 16));
 
@@ -90,7 +93,8 @@ namespace 天龙二叉树人物遍历
                     return;
                 }
                 //首先清空textBox
-                ListTextBox.Clear();
+               // ListTextBox.Clear();
+                ResultlistView.Items.Clear();
                 //特征码搜索
                 while (true)
                 {
@@ -100,7 +104,7 @@ namespace 天龙二叉树人物遍历
                         break;
                     }
                     
-                    ListTextBox.AppendText(result.ToString("X") + "\r\n");
+                 //   ListTextBox.AppendText(result.ToString("X") + "\r\n");
                    
                     
                     ListViewItem item = new ListViewItem();
@@ -115,8 +119,12 @@ namespace 天龙二叉树人物遍历
                 return;
 
             }
-            
-        
+
+        }
+
+        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(ResultlistView.SelectedItems[0].SubItems[1].Text);
 
         }
 

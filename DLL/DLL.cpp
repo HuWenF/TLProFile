@@ -88,7 +88,8 @@ DLL_API int FeatureCode(IN DWORD BaseAddress,IN int SectionSize, IN char *FCode,
 
 		for (j = 0; j < FCodeSize; j++, i++)
 		{
-			if (FCode[j] == (char)"?")
+			char A = 0xcc;
+			if (FCode[j] == A)
 			{
 				continue;
 			}
@@ -110,6 +111,7 @@ DLL_API int FeatureCode(IN DWORD BaseAddress,IN int SectionSize, IN char *FCode,
 	}
 	//释放资源
 	//没找到的话
+	//MessageBox(NULL, L"没找到特征码", NULL, 0);
 	free(TempAddress);
 	return -1;
 		
