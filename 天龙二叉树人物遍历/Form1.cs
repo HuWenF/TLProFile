@@ -59,13 +59,12 @@ namespace 天龙二叉树人物遍历
             
 
             char[] SectionName = SectionNametextBox.Text.ToArray();
-            int size = FCodestr.Length;
-
-           int result = 0;
-           
+            int size = FCodestr.Length / 2;
+            int result = 0;
+            int Count = 0;
             List<Byte> Code = new List<Byte>();
 
-            for (int i = 0; i < size / 2; i++)
+            for (int i = 0; i < size; i++)
             {
                 //Debug.WriteLine(FCodestr.Substring(i*8, 8));
                 //开始转换 ascii码转换为字节 比如"8E"的ascii转成8E的单字节字节
@@ -90,16 +89,34 @@ namespace 天龙二叉树人物遍历
                 {
                     return;
                 }
-
+                //首先清空textBox
+                ListTextBox.Clear();
                 //特征码搜索
-                DLL.FeatureCode(SectionBase, FCoderchr, SectionSize);
+                while (true)
+                {
+                    result = DLL.FeatureCode(SectionBase, SectionSize, FCoderchr, size);
+                    if (result == -1)
+                    {
+                        break;
+                    }
+                    
+                    ListTextBox.AppendText(result.ToString("X") + "\r\n");
+                   
+                    
+                    ListViewItem item = new ListViewItem();
+                    Count++;
+                    item.SubItems[0].Text = Count.ToString();
+                    item.SubItems.Add(result.ToString("X"));
+                    ResultlistView.Items.Add(item);
+                  
+                    SectionBase = result + 1;
+                }
+               
+                return;
 
             }
             
-           
-           
-
-
+        
 
         }
 

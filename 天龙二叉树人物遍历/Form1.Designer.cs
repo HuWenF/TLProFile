@@ -36,11 +36,17 @@
             this.FCtextBox = new System.Windows.Forms.TextBox();
             this.SectionNamelabel = new System.Windows.Forms.Label();
             this.SectionNametextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ListTextBox = new System.Windows.Forms.TextBox();
+            this.RawlabelList = new System.Windows.Forms.Label();
+            this.ResultlistView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(481, 205);
+            this.button1.Location = new System.Drawing.Point(380, 283);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -50,7 +56,7 @@
             // 
             // BasetextBox
             // 
-            this.BasetextBox.Location = new System.Drawing.Point(162, 118);
+            this.BasetextBox.Location = new System.Drawing.Point(142, 9);
             this.BasetextBox.Name = "BasetextBox";
             this.BasetextBox.Size = new System.Drawing.Size(100, 21);
             this.BasetextBox.TabIndex = 1;
@@ -59,7 +65,7 @@
             // Baselabel
             // 
             this.Baselabel.AutoSize = true;
-            this.Baselabel.Location = new System.Drawing.Point(31, 121);
+            this.Baselabel.Location = new System.Drawing.Point(11, 12);
             this.Baselabel.Name = "Baselabel";
             this.Baselabel.Size = new System.Drawing.Size(125, 12);
             this.Baselabel.TabIndex = 2;
@@ -67,7 +73,7 @@
             // 
             // FCbutton
             // 
-            this.FCbutton.Location = new System.Drawing.Point(21, 182);
+            this.FCbutton.Location = new System.Drawing.Point(61, 206);
             this.FCbutton.Name = "FCbutton";
             this.FCbutton.Size = new System.Drawing.Size(75, 23);
             this.FCbutton.TabIndex = 3;
@@ -78,7 +84,7 @@
             // FClabel
             // 
             this.FClabel.AutoSize = true;
-            this.FClabel.Location = new System.Drawing.Point(79, 147);
+            this.FClabel.Location = new System.Drawing.Point(59, 65);
             this.FClabel.Name = "FClabel";
             this.FClabel.Size = new System.Drawing.Size(77, 12);
             this.FClabel.TabIndex = 4;
@@ -86,7 +92,7 @@
             // 
             // FCtextBox
             // 
-            this.FCtextBox.Location = new System.Drawing.Point(162, 144);
+            this.FCtextBox.Location = new System.Drawing.Point(142, 62);
             this.FCtextBox.Name = "FCtextBox";
             this.FCtextBox.Size = new System.Drawing.Size(237, 21);
             this.FCtextBox.TabIndex = 5;
@@ -95,7 +101,7 @@
             // SectionNamelabel
             // 
             this.SectionNamelabel.AutoSize = true;
-            this.SectionNamelabel.Location = new System.Drawing.Point(31, 91);
+            this.SectionNamelabel.Location = new System.Drawing.Point(83, 40);
             this.SectionNamelabel.Name = "SectionNamelabel";
             this.SectionNamelabel.Size = new System.Drawing.Size(53, 12);
             this.SectionNamelabel.TabIndex = 7;
@@ -103,17 +109,77 @@
             // 
             // SectionNametextBox
             // 
-            this.SectionNametextBox.Location = new System.Drawing.Point(162, 88);
+            this.SectionNametextBox.Location = new System.Drawing.Point(142, 37);
             this.SectionNametextBox.Name = "SectionNametextBox";
             this.SectionNametextBox.Size = new System.Drawing.Size(100, 21);
             this.SectionNametextBox.TabIndex = 6;
             this.SectionNametextBox.Text = ".text";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(83, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "搜索结果";
+            // 
+            // ListTextBox
+            // 
+            this.ListTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ListTextBox.Location = new System.Drawing.Point(142, 89);
+            this.ListTextBox.Multiline = true;
+            this.ListTextBox.Name = "ListTextBox";
+            this.ListTextBox.ReadOnly = true;
+            this.ListTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ListTextBox.Size = new System.Drawing.Size(99, 198);
+            this.ListTextBox.TabIndex = 10;
+            // 
+            // RawlabelList
+            // 
+            this.RawlabelList.AutoSize = true;
+            this.RawlabelList.Location = new System.Drawing.Point(74, 160);
+            this.RawlabelList.Name = "RawlabelList";
+            this.RawlabelList.Size = new System.Drawing.Size(0, 12);
+            this.RawlabelList.TabIndex = 11;
+            // 
+            // ResultlistView
+            // 
+            this.ResultlistView.BackgroundImageTiled = true;
+            this.ResultlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.ResultlistView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ResultlistView.FullRowSelect = true;
+            this.ResultlistView.GridLines = true;
+            this.ResultlistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ResultlistView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ResultlistView.LabelEdit = true;
+            this.ResultlistView.Location = new System.Drawing.Point(278, 89);
+            this.ResultlistView.Name = "ResultlistView";
+            this.ResultlistView.Size = new System.Drawing.Size(177, 186);
+            this.ResultlistView.TabIndex = 12;
+            this.ResultlistView.UseCompatibleStateImageBehavior = false;
+            this.ResultlistView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "行数";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "数值";
+            this.columnHeader2.Width = 83;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 374);
+            this.ClientSize = new System.Drawing.Size(586, 439);
+            this.Controls.Add(this.ResultlistView);
+            this.Controls.Add(this.RawlabelList);
+            this.Controls.Add(this.ListTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.SectionNamelabel);
             this.Controls.Add(this.SectionNametextBox);
             this.Controls.Add(this.FCtextBox);
@@ -139,6 +205,12 @@
         private System.Windows.Forms.TextBox FCtextBox;
         private System.Windows.Forms.Label SectionNamelabel;
         private System.Windows.Forms.TextBox SectionNametextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox ListTextBox;
+        private System.Windows.Forms.Label RawlabelList;
+        private System.Windows.Forms.ListView ResultlistView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 

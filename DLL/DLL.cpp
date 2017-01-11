@@ -58,29 +58,35 @@ DLL_API int ReserchTree()
 }
 
 //搜索目标内存（单位页）
-DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int SectionSize)
+DLL_API int FeatureCode(IN DWORD BaseAddress,IN int SectionSize, IN char *FCode, IN int FCodeSize)
 {
+
+	if (BaseAddress == NULL || FCode == NULL || SectionSize == 0 || FCodeSize == 0)
+	{
+		MessageBox(NULL, L"搜索内存参数错误 Error ", NULL, 0);
+		return -1;
+	}
+
+
 	char *TempAddress = (char*)malloc(SectionSize);
-	
-
-
-	
+	if (TempAddress == NULL)
+	{
+		MessageBox(NULL, L"malloc Error 内存空间不足", NULL, 0);
+		return -1;
+	}
 	//读取内存以及初始化
 	memset(TempAddress, 0, SectionSize);
 	ReadProcessMemory(G_Handle, (LPCVOID)BaseAddress, TempAddress, SectionSize, NULL);
 
 	//获取目标内存PE文件text段的大小
 	//开始遍历整个内存空间
-	
-
-
 
 
 	//直接用C语言实现
 	for (int i = 0, j = 0; i < SectionSize; i++)
 	{
 
-		for (j = 0; j < sizeof(FCode); j++,i++)
+		for (j = 0; j < FCodeSize; j++, i++)
 		{
 			if (FCode[j] == (char)"?")
 			{
@@ -94,16 +100,18 @@ DLL_API void FeatureCode(DWORD BaseAddress, char *FCode,int SectionSize)
 			
 		}
 
-		if (j == sizeof(FCode))
+		if (j == FCodeSize)
 		{
-			break;
+			//释放资源
+			free(TempAddress);
+			return i - FCodeSize + BaseAddress; //i-FCodeSize 是偏移地址 BaseAddress 是基址
 		}
 
 	}
-
 	//释放资源
+	//没找到的话
 	free(TempAddress);
-
+	return -1;
 		
 
 }

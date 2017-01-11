@@ -15,6 +15,6 @@
 
 
 DLL_API int ReserchTree();
-DLL_API void FeatureCode(DWORD BaseAddress, char *FCode, int SectionSize);
+DLL_API int FeatureCode(IN DWORD BaseAddress, IN int SectionSize, IN char *FCode, IN int FCodeSize);
 DLL_API int initDll(int ProcID);
 DLL_API int GetProSectionSizeFromPE(DWORD BaseAddress, char TarGetName[], OUT int *OutSectionBase, OUT int *OutSectionSize);
