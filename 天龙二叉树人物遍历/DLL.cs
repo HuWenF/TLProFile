@@ -18,8 +18,8 @@ namespace 天龙二叉树人物遍历
 
         [DllImport("DLL", EntryPoint = "GetProSectionSizeFromPE", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProSectionSizeFromPE(System.Int32 BaseAddress, char[] TarGetName,System.Int32 SectionBase,System.Int32 SectionSize);
-
-
+        [DllImport("DLL", EntryPoint = "initDll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int initDll(int ProcID);
 
     }
 }

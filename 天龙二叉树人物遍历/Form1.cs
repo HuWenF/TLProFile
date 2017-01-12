@@ -18,28 +18,15 @@ namespace 天龙二叉树人物遍历
     {
 
         //载入初始化DLL的调用函数
-        [DllImport("DLL",EntryPoint = "initDll",CallingConvention=CallingConvention.Cdecl)]
-        public static extern int initDll(int ProcID);
+       
        
         //全局参数
         string GameName = "Game";
-
-
-
         public Form1()
         {
 
             InitializeComponent();
-            //DLL初始化
-             //获取进程ID
-            Process[] LocalName = Process.GetProcessesByName(GameName);
-            if (LocalName.Length != 1)
-            {
-                MessageBox.Show("无此进程名或者出现重复进程名");
-                return;
-            }
-            
-            initDll(LocalName[0].Id);
+          
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,6 +38,17 @@ namespace 天龙二叉树人物遍历
         private void FCbutton_Click(object sender, EventArgs e)
         {
 
+            //DLL初始化
+            //获取进程ID
+            string ProName = ProNametextBox.ToString();
+            Process[] LocalName = Process.GetProcessesByName(GameName);
+            if (LocalName.Length != 1)
+            {
+                MessageBox.Show("无此进程名或者出现重复进程名");
+                return;
+            }
+
+            DLL.initDll(LocalName[0].Id);
 
             //获取内容
             //进制转换
@@ -92,12 +90,12 @@ namespace 天龙二叉树人物遍历
                 {
                     return;
                 }
-                //首先清空textBox
-               // ListTextBox.Clear();
+                //首先清空listview
                 ResultlistView.Items.Clear();
-                //特征码搜索
+               
                 while (true)
                 {
+                    //特征码搜索
                     result = DLL.FeatureCode(SectionBase, SectionSize, FCoderchr, size);
                     if (result == -1)
                     {
@@ -106,7 +104,7 @@ namespace 天龙二叉树人物遍历
                     
                  //   ListTextBox.AppendText(result.ToString("X") + "\r\n");
                    
-                    
+                    //开始写入listview 列表中
                     ListViewItem item = new ListViewItem();
                     Count++;
                     item.SubItems[0].Text = Count.ToString();

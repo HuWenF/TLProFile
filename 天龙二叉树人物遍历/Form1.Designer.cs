@@ -38,29 +38,31 @@
             this.SectionNamelabel = new System.Windows.Forms.Label();
             this.SectionNametextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ListTextBox = new System.Windows.Forms.TextBox();
             this.RawlabelList = new System.Windows.Forms.Label();
             this.ResultlistView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProNamelabel = new System.Windows.Forms.Label();
+            this.ProNametextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(61, 252);
+            this.button1.Location = new System.Drawing.Point(56, 333);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "遍历";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // BasetextBox
             // 
-            this.BasetextBox.Location = new System.Drawing.Point(142, 9);
+            this.BasetextBox.Location = new System.Drawing.Point(137, 90);
             this.BasetextBox.Name = "BasetextBox";
             this.BasetextBox.Size = new System.Drawing.Size(100, 21);
             this.BasetextBox.TabIndex = 1;
@@ -69,7 +71,7 @@
             // Baselabel
             // 
             this.Baselabel.AutoSize = true;
-            this.Baselabel.Location = new System.Drawing.Point(11, 12);
+            this.Baselabel.Location = new System.Drawing.Point(6, 93);
             this.Baselabel.Name = "Baselabel";
             this.Baselabel.Size = new System.Drawing.Size(125, 12);
             this.Baselabel.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // FCbutton
             // 
-            this.FCbutton.Location = new System.Drawing.Point(61, 206);
+            this.FCbutton.Location = new System.Drawing.Point(56, 287);
             this.FCbutton.Name = "FCbutton";
             this.FCbutton.Size = new System.Drawing.Size(75, 23);
             this.FCbutton.TabIndex = 3;
@@ -88,7 +90,7 @@
             // FClabel
             // 
             this.FClabel.AutoSize = true;
-            this.FClabel.Location = new System.Drawing.Point(59, 65);
+            this.FClabel.Location = new System.Drawing.Point(54, 146);
             this.FClabel.Name = "FClabel";
             this.FClabel.Size = new System.Drawing.Size(77, 12);
             this.FClabel.TabIndex = 4;
@@ -96,16 +98,15 @@
             // 
             // FCtextBox
             // 
-            this.FCtextBox.Location = new System.Drawing.Point(142, 62);
+            this.FCtextBox.Location = new System.Drawing.Point(137, 143);
             this.FCtextBox.Name = "FCtextBox";
             this.FCtextBox.Size = new System.Drawing.Size(237, 21);
             this.FCtextBox.TabIndex = 5;
-            this.FCtextBox.Text = "8B??240C487826538B5C2414558B6C2410";
             // 
             // SectionNamelabel
             // 
             this.SectionNamelabel.AutoSize = true;
-            this.SectionNamelabel.Location = new System.Drawing.Point(83, 40);
+            this.SectionNamelabel.Location = new System.Drawing.Point(78, 121);
             this.SectionNamelabel.Name = "SectionNamelabel";
             this.SectionNamelabel.Size = new System.Drawing.Size(53, 12);
             this.SectionNamelabel.TabIndex = 7;
@@ -113,7 +114,7 @@
             // 
             // SectionNametextBox
             // 
-            this.SectionNametextBox.Location = new System.Drawing.Point(142, 37);
+            this.SectionNametextBox.Location = new System.Drawing.Point(137, 118);
             this.SectionNametextBox.Name = "SectionNametextBox";
             this.SectionNametextBox.Size = new System.Drawing.Size(100, 21);
             this.SectionNametextBox.TabIndex = 6;
@@ -122,27 +123,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 133);
+            this.label1.Location = new System.Drawing.Point(78, 214);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 9;
             this.label1.Text = "搜索结果";
             // 
-            // ListTextBox
-            // 
-            this.ListTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ListTextBox.Location = new System.Drawing.Point(459, 89);
-            this.ListTextBox.Multiline = true;
-            this.ListTextBox.Name = "ListTextBox";
-            this.ListTextBox.ReadOnly = true;
-            this.ListTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ListTextBox.Size = new System.Drawing.Size(99, 198);
-            this.ListTextBox.TabIndex = 10;
-            // 
             // RawlabelList
             // 
             this.RawlabelList.AutoSize = true;
-            this.RawlabelList.Location = new System.Drawing.Point(74, 160);
+            this.RawlabelList.Location = new System.Drawing.Point(69, 241);
             this.RawlabelList.Name = "RawlabelList";
             this.RawlabelList.Size = new System.Drawing.Size(0, 12);
             this.RawlabelList.TabIndex = 11;
@@ -159,7 +149,7 @@
             this.ResultlistView.FullRowSelect = true;
             this.ResultlistView.GridLines = true;
             this.ResultlistView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ResultlistView.Location = new System.Drawing.Point(151, 89);
+            this.ResultlistView.Location = new System.Drawing.Point(146, 170);
             this.ResultlistView.Name = "ResultlistView";
             this.ResultlistView.Size = new System.Drawing.Size(175, 186);
             this.ResultlistView.TabIndex = 12;
@@ -191,14 +181,31 @@
             this.复制ToolStripMenuItem.Text = "复制";
             this.复制ToolStripMenuItem.Click += new System.EventHandler(this.复制ToolStripMenuItem_Click);
             // 
+            // ProNamelabel
+            // 
+            this.ProNamelabel.AutoSize = true;
+            this.ProNamelabel.Location = new System.Drawing.Point(78, 66);
+            this.ProNamelabel.Name = "ProNamelabel";
+            this.ProNamelabel.Size = new System.Drawing.Size(41, 12);
+            this.ProNamelabel.TabIndex = 14;
+            this.ProNamelabel.Text = "进程名";
+            // 
+            // ProNametextBox
+            // 
+            this.ProNametextBox.Location = new System.Drawing.Point(137, 63);
+            this.ProNametextBox.Name = "ProNametextBox";
+            this.ProNametextBox.Size = new System.Drawing.Size(100, 21);
+            this.ProNametextBox.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 439);
+            this.Controls.Add(this.ProNamelabel);
+            this.Controls.Add(this.ProNametextBox);
             this.Controls.Add(this.ResultlistView);
             this.Controls.Add(this.RawlabelList);
-            this.Controls.Add(this.ListTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SectionNamelabel);
             this.Controls.Add(this.SectionNametextBox);
@@ -227,13 +234,14 @@
         private System.Windows.Forms.Label SectionNamelabel;
         private System.Windows.Forms.TextBox SectionNametextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox ListTextBox;
         private System.Windows.Forms.Label RawlabelList;
         private System.Windows.Forms.ListView ResultlistView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 复制ToolStripMenuItem;
+        private System.Windows.Forms.Label ProNamelabel;
+        private System.Windows.Forms.TextBox ProNametextBox;
     }
 }
 
